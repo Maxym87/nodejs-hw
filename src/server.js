@@ -4,6 +4,7 @@ import pino from 'pino-http';
 import 'dotenv/config';
 
 const PORT = process.env.PORT ?? 3000;
+
 const app = express();
 
 app.use(express.json());
@@ -29,7 +30,7 @@ app.get('/notes', (_req, res) => {
 
 });
 
-app.get('/notes:noteId', (req, res) => {
+app.get('/notes/:noteId', (req, res) => {
   const noteId = req.params.noteId;
   res.status(200).json({
     "message": `Retrieved note with ID: ${noteId}`
