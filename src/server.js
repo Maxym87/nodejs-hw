@@ -24,17 +24,30 @@ app.use(
   }),
 );
 
-app.get('/', (req, res) => {
+app.get('/notes', (_req, res) => {
   res.status(200).json({"message": "Retrieved all notes"});
 
 });
 
+app.get('/notes:noteId', (req, res) => {
+  const noteId = req.params.noteId;
+  res.status(200).json({
+    "message": `Retrieved note with ID: ${noteId}`
+  });
+});
+
+app.get('/test-error', (req, res) => {
+    throw new Error('Simulated server error');
+});
+
+app.use((req, res, next) => {
+  res.status(404).json({
+    "message": "Route not found"
+  });
+});
 
 
-
-
-
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   res.status(500).json({
     message: 'Internal server error',
     error: err.message
@@ -42,6 +55,6 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-   console.log(`Server is running on port ${PORT}`)
+   console.log(`Server is running on port ${PORT}`);
 });
 
