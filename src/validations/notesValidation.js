@@ -2,7 +2,7 @@ import { Joi, Segments} from "celebrate";
 import { TAGS } from "../constants/tags.js";
 import { isValidObjectId } from "mongoose";
 
-export const createNotesSchema = {
+export const createNoteSchema = {
   [Segments.BODY]: Joi.object({
 title: Joi.string().min(1).required().messages({
 'string.base': 'Title must be a string',
@@ -25,7 +25,7 @@ const objectIdValidator = (value, helpers) => {
 export const noteIdSchema = {
   [Segments.PARAMS]: Joi.object({
     noteId: Joi.string().required().custom(objectIdValidator).messages({
-    'noteId.invalid': `Note ID - {#value} - must be valid mongo ID (24 characters in hex-format)`,
+    'noteId.invalid': `Note ID - {{#value}} - must be valid mongo ID (24 characters in hex-format)`,
     })
   })
 };
