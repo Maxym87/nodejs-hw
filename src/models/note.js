@@ -24,4 +24,17 @@ default: 'Todo',
 }
 );
 
-export const Note = model('Note', notesSchema);
+
+notesSchema.index(
+  {
+    title: 'text',
+    content: 'text',
+  },
+  {
+    name: 'NoteTextIndex',
+    weights: {title: 10, content: 5},
+    default_language: 'english',
+  }
+);
+
+export const Note = model('Note', notesSchema, 'notes');
