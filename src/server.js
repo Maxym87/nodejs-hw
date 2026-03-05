@@ -6,6 +6,7 @@ import notesRoutes from './routes/notesRoutes.js';
 import {errorHandler} from './middleware/errorHandler.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { logger } from './middleware/logger.js';
+import { errors } from 'celebrate';
 
 const PORT = process.env.PORT ?? 3000;
 
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(notesRoutes);
 
 app.use(notFoundHandler);
+app.use(errors());
 app.use(errorHandler);
 
 
