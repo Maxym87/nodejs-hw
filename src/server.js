@@ -3,10 +3,12 @@ import cors from 'cors';
 import 'dotenv/config';
 import { connectMongoDB } from './db/connectMongoDB.js';
 import notesRoutes from './routes/notesRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 import {errorHandler} from './middleware/errorHandler.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { logger } from './middleware/logger.js';
 import { errors } from 'celebrate';
+
 
 const PORT = process.env.PORT ?? 3000;
 
@@ -16,6 +18,7 @@ app.use(logger);
 app.use(express.json());
 app.use(cors());
 
+app.use(authRoutes);
 app.use(notesRoutes);
 
 app.use(notFoundHandler);
