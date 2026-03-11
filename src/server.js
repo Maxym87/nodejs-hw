@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import cookieParser from "cookie-parser";
 import 'dotenv/config';
 import { connectMongoDB } from './db/connectMongoDB.js';
 import notesRoutes from './routes/notesRoutes.js';
@@ -17,6 +18,7 @@ const app = express();
 app.use(logger);
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 app.use(authRoutes);
 app.use(notesRoutes);
